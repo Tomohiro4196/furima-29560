@@ -13,7 +13,7 @@
 | first_kana  | string     | null: false |
 
 ### Association
-- has_many :items
+- has_many :item
 
 ## items Table
 
