@@ -6,7 +6,6 @@
 | ------------------ | ---------- | ------------------------- |
 | nickname           | string     | null: false               |
 | email              | string     | null: false, unique: true | 
-| phone_number       | integer    | null: false, unique: true |
 | encrypted_password | string     | null: false               |
 | birthday           | date       | null: false               |
 | family_name        | string     | null: false               | 
@@ -25,11 +24,11 @@
 | item_name       | string  | null: false                    |
 | price           | integer | null: false                    |
 | user_id         | integer | null: false, foreign_key: true |
-| condition_id    | integer | null: false, foreign_key: true |
-| shipping_fee_id | integer | null: false, foreign_key: true |
-| prefecture_id   | integer | null: false, foreign_key: true |
-| days_ship_id    | integer | null: false, foreign_key: true |
-| category_id     | integer | null: false, foreign_key: true |
+| condition_id    | integer | null: false                    |
+| shipping_fee_id | integer | null: false                    |
+| prefecture_id   | integer | null: false                    |
+| days_ship_id    | integer | null: false                    |
+| category_id     | integer | null: false                    |
 
 ### Association
 - belongs_to        :user
@@ -53,7 +52,8 @@
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | order_id      | references | null: false, foreign_key: true |
-| prefecture_id | references | null: false, foreign_key: true |
+| phone_number  | string     | null: false                    |
+| prefecture_id | references | null: false                    |
 | city          | string     | null: false                    |
 | town_block    | string     | null: false                    |
 | building_name | string     |                                |
