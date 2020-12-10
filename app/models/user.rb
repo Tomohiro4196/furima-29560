@@ -5,20 +5,30 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable   
          
   katakana_reg = /\A^[ァ-ンー－]+$\z/
+  zennkaku_reg = /\A^[ぁ-んァ-ン一-龥]\z/
 
   with_options presence: true do
     validates :nickname    
     validates :birthday
-    validates :family_name
-    validates :first_name
-    validates :family_kana
-    validates :first_name, format: { 
-      with:  katakana_reg,
-      message: "は全角カタカナのみで入力して下さい"
-    } 
+      with_options format: {
+        with: zennkaku_reg,
+        message: "は全角のみで入力してください"
+      } do
+        validates :family_name
+        validates :first_name
+      end
+
+      with_options format: { 
+        with:  katakana_reg,
+        message: "は全角カタカナのみで入力して下さい"
+      } do
+        validates :family_kana
+        validates :first_kana
+      end
   end
 
   validate :password_complexity
+
 
   def password_complexity
     return if password =~ /^(?=.*?[a-z])(?=.*?[0-9]).{6,70}$/
