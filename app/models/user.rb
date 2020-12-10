@@ -2,7 +2,9 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable   
+         
+  katakana_reg = /\A^[ァ-ンー－]+$\z/
 
   with_options presence: true do
     validates :nickname    
@@ -10,10 +12,12 @@ class User < ApplicationRecord
     validates :family_name
     validates :first_name
     validates :family_kana
-    validates :first_kana
+    validates :first_name, format: { 
+      with:  katakana_reg,
+      message: "は全角カタカナのみで入力して下さい"
+    } 
   end
 
- 
   validate :password_complexity
 
   def password_complexity
