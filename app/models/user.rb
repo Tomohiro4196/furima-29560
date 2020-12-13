@@ -33,6 +33,6 @@ class User < ApplicationRecord
   def password_complexity
     return if password =~ /^(?=.*?[a-z])(?=.*?[0-9]).{6,70}$/
 
-    errors.add :password, 'should include 1 lowercase and 1 digit'
+    errors.add :password, 'should include 1 lowercase and 1 digit, and more than 6'
   end
 end
