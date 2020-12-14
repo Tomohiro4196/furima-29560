@@ -37,8 +37,8 @@ RSpec.describe User, type: :model do
       end
 
       it 'フリガナが全て全角カタカナであれば登録できる' do
-        @user.first_kana = 'テツト'
         @user.family_kana = 'ヤマダ'
+        @user.first_kana = 'テツト'
       end
     end
 
