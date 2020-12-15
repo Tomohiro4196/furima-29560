@@ -92,11 +92,13 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include "Password confirmation doesn't match Password"
       end
 
-      it 'ユーザー本名が苗字と名前の両方がなければ登録できない' do
+      it 'ユーザー本名の名前がなければ登録できない' do
         @user.first_name = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("First name can't be blank", 'First name は全角のみで入力してください')
+      end
 
+      it 'ユーザー本名の苗字がなければ登録できない' do
         @user.family_name = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Family name can't be blank", 'Family name は全角のみで入力してください')
