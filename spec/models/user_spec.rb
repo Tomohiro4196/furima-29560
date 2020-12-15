@@ -33,11 +33,13 @@ RSpec.describe User, type: :model do
       it 'first_name/family_nameが全角であれば登録できる' do
         @user.family_name = '山田'
         @user.first_name = '哲人'
+        expect(@user).to be_valid
       end
 
       it 'フリガナが全て全角カタカナであれば登録できる' do
         @user.family_kana = 'ヤマダ'
         @user.first_kana = 'テツト'
+        expect(@user).to be_valid
       end
     end
 
