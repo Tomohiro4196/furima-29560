@@ -6,4 +6,10 @@ class Item < ApplicationRecord
   belongs_to :days_ship
   belongs_to :category
 
+  with_options presence: true do
+    :item_name
+    :price
+    :description
+  end
+  
 end
