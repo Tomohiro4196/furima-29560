@@ -10,6 +10,8 @@ class Item < ApplicationRecord
     :item_name
     :price
     :description
+    :image
   end
-  
+
+  has_many_attached :images
 end
