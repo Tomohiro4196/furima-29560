@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+
   belongs_to :condition
   belongs_to :shipping_fee
   belongs_to :prefecture
@@ -10,8 +11,9 @@ class Item < ApplicationRecord
     :item_name
     :price
     :description
-    :image
   end
 
   has_many_attached :images
+  belongs_to :user
+
 end

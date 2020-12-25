@@ -34,4 +34,6 @@ class User < ApplicationRecord
 
     errors.add :password, 'should include 1 lowercase and 1 digit, and more than 6'
   end
+
+  has_many :items
 end
