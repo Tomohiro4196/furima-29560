@@ -13,7 +13,17 @@ class Item < ApplicationRecord
     :description
   end
 
-  has_many_attached :images
+  validate :image_presence
+
+  def image_presence
+    unless image.attached?
+      errors.add(:image, 'ファイルを選択してください')
+    end
+  end
+
+  has_one_attached :image
   belongs_to :user
+
+  
 
 end
