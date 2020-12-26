@@ -1,6 +1,8 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
+  
+
   belongs_to :condition
   belongs_to :shipping_fee
   belongs_to :prefecture
@@ -9,9 +11,19 @@ class Item < ApplicationRecord
 
   with_options presence: true do
     :item_name
-    :price
     :description
   end
+
+  with_options numericality: { other_than: 1,  message: 'を選択してください'} do
+    validates :condition_id 
+    validates :shipping_fee_id
+    validates :prefecture_id
+    validates :days_ship_id
+    validates :category_id
+  end
+  
+
+  validates :price, numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: ''}
 
   validate :image_presence
 
@@ -23,7 +35,5 @@ class Item < ApplicationRecord
 
   has_one_attached :image
   belongs_to :user
-
-  
 
 end
