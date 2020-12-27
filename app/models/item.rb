@@ -10,8 +10,8 @@ class Item < ApplicationRecord
   belongs_to :category
 
   with_options presence: true do
-    :item_name
-    :description
+    validates :item_name
+    validates :description
   end
 
   with_options numericality: { other_than: 1,  message: 'を選択してください'} do
@@ -23,7 +23,7 @@ class Item < ApplicationRecord
   end
   
 
-  validates :price, numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: ''}
+  validates :price, numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: 'は300-9,999,999の範囲で入力してください'}
 
   validate :image_presence
 
