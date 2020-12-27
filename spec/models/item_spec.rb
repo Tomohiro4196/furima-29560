@@ -11,11 +11,6 @@ RSpec.describe Item, type: :model do
       it '必須事項があれば出品できる' do
         expect(@item).to be_valid
       end
-
-      it '価格が範囲内であれば出品できること' do
-        @item.price = 400
-        expect(@item).to be_valid
-      end
     end
 
     context 'unable to sell items' do
@@ -73,8 +68,14 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price は300-9,999,999の範囲で入力してください')
       end
 
-      it '価格が範囲内に収まっていなければ出品ができないこと' do
-        @item.price = 20
+      it '価格が300未満であれば出品ができないこと' do
+        @item.price = 299
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price は300-9,999,999の範囲で入力してください')
+      end
+
+      it '価格が10,000,000以上であれば出品ができないこと' do
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price は300-9,999,999の範囲で入力してください')
       end
