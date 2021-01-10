@@ -53,7 +53,7 @@
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | order_id      | integer    | null: false, foreign_key: true |
-| phone_number  | string     | null: false                    |
+| phone_number  | integer    | null: false                    |
 | prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
 | town_block    | string     | null: false                    |
