@@ -12,7 +12,9 @@ class OrderAddress
   validates :prefecture_id, numericality: {other_than: 0, message: "can't be blank"}
 
   def save
+    # @order_addressとして作った情報を振り分ける
     order = Order.create(item_id: item_id, buyer_id: buyer_id)
+    # @order_addressから持ってくるのでコントローラーに記載したカラム名を参照する
     Address.create(order_id: order.id, phone_number: phone_number, prefecture_id: prefecture_id, city: city, town_block: town_block, building_name: building_name, zip_code: zip_code)
   end
 
