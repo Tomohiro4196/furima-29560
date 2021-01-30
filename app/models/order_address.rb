@@ -1,6 +1,6 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :phone_number, :prefecture_id, :city, :town_block, :building_name, :zip_code, :item_id, :buyer_id
+  attr_accessor :phone_number, :prefecture_id, :city, :town_block, :building_name, :zip_code, :item_id, :buyer_id, :token
 
   with_options presence: true do
     validates :phone_number, format: {with: /\A[0-9]{11}\z/, message:'is not valid'}

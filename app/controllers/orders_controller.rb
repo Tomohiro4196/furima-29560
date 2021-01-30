@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
   private
 
   def order_address_params
-    params.require(:order_address).permit(:phone_number, :prefecture_id, :city, :town_block, :building_name, :zip_code).merge(item_id: params[:item_id], buyer_id: current_user.id)
+    params.require(:order_address).permit(:phone_number, :prefecture_id, :city, :town_block, :building_name, :zip_code).merge(item_id: params[:item_id], buyer_id: current_user.id, token: params[:token])
     # paramsに付随しているitem_idを取得するためにitem_id; params[:item_id]という風に記載している
   end
 
