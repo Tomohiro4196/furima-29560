@@ -7,9 +7,11 @@ class OrderAddress
     validates :city
     validates :town_block
     validates :zip_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
+    validates :token
   end
 
   validates :prefecture_id, numericality: {other_than: 0, message: "can't be blank"}
+
 
   def save
     # @order_addressとして作った情報を振り分ける
