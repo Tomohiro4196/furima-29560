@@ -13,6 +13,7 @@ class OrdersController < ApplicationController
       #renderで戻る時用のインスタンス
       @order_address = OrderAddress.new(order_address_params)
       if @order_address.valid?
+        payment
         @order_address.save
         #order_address.rbのモデル内にsaveメソッドを記載。
         #rubyはコントローラーはスリムに見せるようにするのが原則
@@ -27,6 +28,15 @@ class OrdersController < ApplicationController
   def order_address_params
     params.require(:order_address).permit(:phone_number, :prefecture_id, :city, :town_block, :building_name, :zip_code).merge(item_id: params[:item_id], buyer_id: current_user.id, token: params[:token])
     # paramsに付随しているitem_idを取得するためにitem_id; params[:item_id]という風に記載している
+  end
+
+  def payment
+    Payjp.api_key = "sk_test_8e9b161d35b798fba49773a0"
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: order_address_params[:token],
+      currency: 'jpy'
+    )
   end
 
 end
