@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
   end
 
   def payment
-    Payjp.api_key = "sk_test_8e9b161d35b798fba49773a0"
+    Payjp.api_key = ENV["FURIMA_SECRET_KEY"]
     Payjp::Charge.create(
       amount: @item.price,
       card: order_address_params[:token],
