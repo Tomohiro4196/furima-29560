@@ -11,8 +11,7 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
     # renderで戻る時用のインスタンス
     @order_address = OrderAddress.new(order_address_params)
-
-    binding.pry
+    # インスタンスの作成
     if @order_address.valid?
       payment
       @order_address.save
