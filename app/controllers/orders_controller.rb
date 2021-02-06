@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :item_setting, only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
      if current_user.id == @item.user_id || @item.order != nil
       redirect_to root_path
      end 
@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
     # renderで戻る時用のインスタンス
     @order_address = OrderAddress.new(order_address_params)
     # インスタンスの作成
@@ -31,6 +30,10 @@ class OrdersController < ApplicationController
   def order_address_params
     params.require(:order_address).permit(:phone_number, :prefecture_id, :city, :town_block, :building_name, :zip_code).merge(item_id: params[:item_id], buyer_id: current_user.id, token: params[:token])
     # paramsに付随しているitem_idを取得するためにitem_id; params[:item_id]という風に記載している
+  end
+
+  def item_setting
+    @item = Item.find(params[:item_id])
   end
 
   def payment
