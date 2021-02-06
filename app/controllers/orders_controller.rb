@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # renderで戻る時用のインスタンス
     @order_address = OrderAddress.new(order_address_params)
     # インスタンスの作成
     if @order_address.valid?
