@@ -3,6 +3,9 @@ class OrdersController < ApplicationController
 
   def index
     @item = Item.find(params[:item_id])
+     if current_user.id == @item.user_id || @item.order != nil
+      redirect_to root_path
+     end 
     @order_address = OrderAddress.new
     # indexページでインスタンスを作成するからnewメソッドには入力しない
   end
